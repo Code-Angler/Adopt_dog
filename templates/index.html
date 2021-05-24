@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>가족을 입양하세요!</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+    <link rel="icon" href="/Sparta_homework/adopt_dog.ico" type="image/x-icon">
+
+    <style>
+        * {
+            font-family: 'Gugi', cursive;
+        }
+
+        .main_img {
+            text-align: center;
+            margin: 20px auto 50px auto;
+            width: 600px;
+            height: 450px;
+            display: block;
+
+        }
+
+        .item-desc {
+            width: 600px;
+            margin-bottom: 50px;
+        }
+
+        .family {
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+        }
+
+        .donot {
+            color: darkred;
+        }
+
+        .item-order {
+            width: 600px;
+            margin-bottom: 20px;
+        }
+
+        .warp {
+            margin: auto;
+            width: 600px;
+        }
+
+        .order-btn {
+            margin: auto;
+            width: 100px;
+            display: block;
+            margin-bottom: 50px;
+        }
+
+        .name_dog {
+            color: darkslategrey;
+            font-size: 23px;
+            font-weight: bold;
+        }
+        .table {
+            width: 600px;
+            margin: auto;
+        }
+
+
+    </style>
+    <script>
+        function order() {
+            let name = $('#name').val();
+            let url = $('#img_url').val();
+            let species = $('#dog_species').val();
+            let phone = $('#phone').val();
+
+            $.ajax({
+                type: "POST",
+                url: "/test",
+                data: {
+                    name_give: name,
+                    url_give: url,
+                    species_give: species,
+                    phone_give: phone
+                },
+                success: function (response) {
+                    alert(response["msg"]);
+                }
+            })
+        }
+
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "https://api.thedogapi.com/v1/images/search",
+                data: {},
+                success: function (response) {
+                    let dog_url = response[0]['url'];
+                    let dog_name = response[0]['breeds'][0]['name'];
+                    if (dog_name.length > 0) {
+                        $('#img-box').attr("src", dog_url);
+                        $('#name_dog').append(dog_name);
+                    }
+                }
+            })
+        })
+
+
+        $.ajax({
+            type: "GET",
+            url: "/test",
+            data: {},
+            success: function (response) {
+                let inform = response['inform_adopt']
+                for (let i = 0; i < inform.length; i++) {
+                    let name = inform[i]['name'];
+                    let url = inform[i]['url'];
+                    let species = inform[i]['species'];
+                    let phone = inform[i]['phone'];
+
+                    let temp_html = `<tr>
+                                        <td>${name}</td>
+                                        <td>"@@@"</td>
+                                        <td>${species}</td>
+                                        <td>${phone}</td>
+                                    </tr>`
+
+                    $('#dogs').append(temp_html);
+
+                }
+            }
+        })
+
+
+        function refresh() {
+            location.reload()
+        }
+
+    </script>
+</head>
+
+<body>
+    <div>
+        <img class="main_img" id="img-box" alt=""
+             src="https://mblogthumb-phinf.pstatic.net/MjAxOTEwMTZfMTIg/MDAxNTcxMjEyMTIxMTY5.jbybfCrsrLqcTHhc5PXLMpoUmErObrUN71qulzKBISgg.VHWJKNGD-_1SFL5qjHTVwRs57GP8GE0uHKKO0gBQz6gg.PNG.canonkoreacamera/%EB%B8%94%EB%A1%9C%EA%B7%B8_%EC%BB%A4%EB%B2%84.png?type=w800"/>
+        <div class="warp">
+            <div class="item-desc">
+                <h1 class="donot">사지 마세요 !! 입양하세요<br><span class="family">가족이 될 우리 강아지 이름은</span><span class="name_dog"
+                                                                                                       id="name_dog"> </span>
+                </h1>
+                <h3>한 해에 버려지는 유기동물의 수는 '10만 마리', 따스한 손길로 유기견에게 새로운 가족이 되어주세요!!</h3>
+                <button type="button" onclick="refresh()" class="btn btn-info">다른강아지 보기</button>
+            </div>
+            <div class="item-order">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">신청자이름</span>
+                    </div>
+                    <input type="text" id="name" class="form-control" aria-label="Default"
+                           aria-describedby="inputGroup-sizing-default">
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">이미지 URL주소</span>
+                </div>
+                <input type="text" id="img_url" class="form-control" aria-label="Default"
+                       aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">강아지 종류</span>
+                </div>
+                <input type="text" id="dog_species" class="form-control" aria-label="Default"
+                       aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">전화번호</span>
+                </div>
+                <input type="text" id="phone" class="form-control" aria-label="Default"
+                       aria-describedby="inputGroup-sizing-default">
+            </div>
+        </div>
+        <button type="button" onclick="order()" class="btn btn-primary order-btn">신청하기</button>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">이름</th>
+                <th scope="col">url</th>
+                <th scope="col">종</th>
+                <th scope="col">전화번호</th>
+            </tr>
+            </thead>
+            <tbody id="dogs">
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
