@@ -21,9 +21,13 @@
             crossorigin="anonymous"></script>
 
     <title>가족을 입양하세요!</title>
+    <meta property="og:title" content="사지 마세요 !! 입양하세요"/>
+    <meta property="og:description" content="당신의 가족이 될 강아지는??"/>
+    <meta property="og:image" content="{{ url_for('static', filename='dog.png') }}"/>
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
-    <link rel="icon" href="/Sparta_homework/adopt_dog.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../static/adopt_dog.ico" type="image/x-icon"/>
 
     <style>
         * {
@@ -80,7 +84,11 @@
             width: 600px;
             margin: auto;
         }
-
+        .doggg {
+            width: 80px;
+            height: 80px;
+            display: block;
+        }
 
     </style>
     <script>
@@ -101,6 +109,7 @@
                 },
                 success: function (response) {
                     alert(response["msg"]);
+                    location.reload()
                 }
             })
         }
@@ -117,6 +126,7 @@
                     if (dog_name.length > 0) {
                         $('#img-box').attr("src", dog_url);
                         $('#name_dog').append(dog_name);
+
                     }
                 }
             })
@@ -134,12 +144,17 @@
                     let url = inform[i]['url'];
                     let species = inform[i]['species'];
                     let phone = inform[i]['phone'];
+                    let secret_num = "###-####-" + (phone.slice(-4));
 
                     let temp_html = `<tr>
                                         <td>${name}</td>
-                                        <td>"@@@"</td>
+                                        <td class="media-left">
+                                            <figure class="image">
+                                                <img class="doggg" src="${url}" alt="Placeholder image"/>
+                                            </figure>
+                                        </td>
                                         <td>${species}</td>
-                                        <td>${phone}</td>
+                                        <td>${secret_num}</td>
                                     </tr>`
 
                     $('#dogs').append(temp_html);
