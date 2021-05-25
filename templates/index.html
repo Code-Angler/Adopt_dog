@@ -125,11 +125,13 @@
                 data: {},
                 success: function (response) {
                     let dog_url = response[0]['url'];
-                    let dog_name = response[0]['breeds'][0]['name'];
-                    if (dog_name.length > 0) {
+                    if (response[0]['breeds'] == ''){
                         $('#img-box').attr("src", dog_url);
-                        $('#name_dog').append(dog_name);
-
+                        $('#name_dog').append('');
+                    } else {
+                        let dog_name = response[0]['breeds'][0]['name'];
+                        $('#img-box').attr("src", dog_url);
+                            $('#name_dog').append(dog_name);
                     }
                 }
             })
@@ -170,6 +172,8 @@
         }
 
         function share() {
+
+
             alert('url 복사완료')
         }
 
@@ -229,7 +233,7 @@
             <thead>
             <tr>
                 <th scope="col">이름</th>
-                <th scope="col">url</th>
+                <th scope="col">강아지 사진</th>
                 <th scope="col">종</th>
                 <th scope="col">전화번호</th>
             </tr>
