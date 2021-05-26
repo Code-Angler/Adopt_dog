@@ -4,7 +4,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width = device-width, initial-scale = 0.6, shrink-to-fit = no, user-scalable=yes">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -153,28 +153,24 @@
                                         <td>${name}</td>
                                         <td class="media-left">
                                             <figure class="image">
-                                                <img class="doggg" src="${url}" alt="Placeholder image"/>
+                                                <img class="doggg" id="dogg" src="${url}" alt="Placeholder image"/>
                                             </figure>
                                         </td>
                                         <td>${species}</td>
                                         <td>${secret_num}</td>
                                     </tr>`
-
                     $('#dogs').append(temp_html);
-
                 }
             }
         })
-
 
         function refresh() {
             location.reload()
         }
 
-        function share() {
-
-
-            alert('url 복사완료')
+        // let dog_url = $('img').attr('src');
+        function share(){
+            alert('이미지 url 복사완료')
         }
 
         function spe_share(){
@@ -194,9 +190,9 @@
                                                                                                        id="name_dog"> </span>
                 </h1>
                 <h3>한 해에 버려지는 유기동물의 수는 '10만 마리', 따스한 손길로 유기견에게 새로운 가족이 되어주세요!!</h3>
-                <button type="button" onclick="refresh()" class="btn btn-info k">다른강아지 보기</button><button type="button" onclick="share()" class="btn btn-success k">이미지 url 복사 준비중</button><button type="button" onclick="spe_share()" class="btn btn-info k">강아지 종류 복사 준비중</button>
-
+                <button type="button" onclick="refresh()" class="btn btn-info k">다른강아지 보기</button><button id="temp_copy" onclick="share()" type="button" class="btn btn-success k">이미지 url 복사 준비중</button><button type="button" onclick="spe_share()" class="btn btn-info k">강아지 종류 복사 준비중</button>
             </div>
+            </script>
             <div class="item-order">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
