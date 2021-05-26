@@ -126,14 +126,13 @@
                 url: "https://api.thedogapi.com/v1/images/search",
                 data: {},
                 success: function (response) {
-                    let dog_url = response[0]['url'];
-                    if (response[0]['breeds'] == ''){
-                        $('#img-box').attr("src", dog_url);
-                        $('#name_dog').append('');
-                    } else {
+                    if ((response[0]['breeds']).length != 0) {
+                        let dog_url = response[0]['url'];
                         let dog_name = response[0]['breeds'][0]['name'];
                         $('#img-box').attr("src", dog_url);
-                            $('#name_dog').append(dog_name);
+                        $('#name_dog').append(dog_name);
+                    } else {
+                        window.location.reload()
                     }
                 }
             })
