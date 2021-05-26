@@ -12,7 +12,7 @@ def home():
 
 @app.route('/test', methods=['GET'])
 def test_get():
-   adopt = list(db.adopt_dog.find({}, {'_id': False}))
+   adopt = list(db.adopt_dog.find({}, {'_id': False}).sort('_id', -1))
    return jsonify({'inform_adopt': adopt})
 
 @app.route('/test', methods=['POST'])
