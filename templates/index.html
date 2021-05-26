@@ -90,8 +90,10 @@
             display: block;
         }
         .k {
-            margin-right: 30px;
+            margin-right: 50px;
+            padding: 8px 20px 8px 20px;
         }
+
 
     </style>
     <script>
@@ -168,12 +170,32 @@
             location.reload()
         }
 
-        // let dog_url = $('img').attr('src');
+
+
         function share(){
+            let dog_url = $('img').attr('src');
+            var textarea = document.createElement('textarea');
+            textarea.value = dog_url;
+            document.body.appendChild(textarea);
+            textarea.select();
+            textarea.setSelectionRange(0, 9999);
+            document.execCommand('copy');
+            document.body.removeChild((textarea));
             alert('이미지 url 복사완료')
         }
 
+
         function spe_share(){
+            let dog_name = document.getElementById('name_dog')
+            let d_name = dog_name.textContent
+            console.log(d_name);
+            var textarea = document.createElement('textarea');
+            textarea.value = d_name;
+            document.body.appendChild(textarea);
+            textarea.select();
+            textarea.setSelectionRange(0, 9999);
+            document.execCommand('copy');
+            document.body.removeChild((textarea));
             alert('강아지 종류 복사완료')
         }
 
@@ -186,11 +208,11 @@
              src="https://mblogthumb-phinf.pstatic.net/MjAxOTEwMTZfMTIg/MDAxNTcxMjEyMTIxMTY5.jbybfCrsrLqcTHhc5PXLMpoUmErObrUN71qulzKBISgg.VHWJKNGD-_1SFL5qjHTVwRs57GP8GE0uHKKO0gBQz6gg.PNG.canonkoreacamera/%EB%B8%94%EB%A1%9C%EA%B7%B8_%EC%BB%A4%EB%B2%84.png?type=w800"/>
         <div class="warp">
             <div class="item-desc">
-                <h1 class="donot">사지 마세요 !! 입양하세요<br><span class="family">가족이 될 우리 강아지 종은 </span><span class="name_dog"
-                                                                                                       id="name_dog"> </span>
+                <h1 class="donot">사지 마세요 !! 입양하세요<br><span class="family">가족이 될 우리 강아지 종은  </span><span class="name_dog"
+                                                                                                       id="name_dog"></span>
                 </h1>
                 <h3>한 해에 버려지는 유기동물의 수는 '10만 마리', 따스한 손길로 유기견에게 새로운 가족이 되어주세요!!</h3>
-                <button type="button" onclick="refresh()" class="btn btn-info k">다른강아지 보기</button><button id="temp_copy" onclick="share()" type="button" class="btn btn-success k">이미지 url 복사 준비중</button><button type="button" onclick="spe_share()" class="btn btn-info k">강아지 종류 복사 준비중</button>
+                <button type="button" onclick="refresh()" class="btn btn-info k">다른강아지 보기</button><button id="temp_copy" onclick="share()" type="button" class="btn btn-success k">이미지 url 복사</button><button type="button" onclick="spe_share()" class="btn btn-info k">강아지 종류 복사</button>
             </div>
             </script>
             <div class="item-order">
@@ -207,14 +229,14 @@
                     <span class="input-group-text" id="inputGroup-sizing-default">이미지 URL주소</span>
                 </div>
                 <input type="text" id="img_url" class="form-control" aria-label="Default"
-                       aria-describedby="inputGroup-sizing-default" placeholder="강아지 사진의 이미지주소를 복사하여 붙여넣어주세요">
+                       aria-describedby="inputGroup-sizing-default" placeholder="">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">강아지 종류</span>
                 </div>
                 <input type="text" id="dog_species" class="form-control" aria-label="Default"
-                       aria-describedby="inputGroup-sizing-default" placeholder="강아지 종을 복사하여 붙여넣어주세요">
+                       aria-describedby="inputGroup-sizing-default" placeholder="">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
