@@ -94,7 +94,6 @@
             padding: 8px 20px 8px 20px;
         }
 
-
     </style>
     <script>
         function order() {
@@ -150,8 +149,9 @@
                     let species = inform[i]['species'];
                     let phone = inform[i]['phone'];
                     let secret_num = "###-####-" + (phone.slice(-4));
+                    let secret_name = (name[0] + '@' + name.slice(2));
                     let temp_html = `<tr>
-                                        <td>${name}</td>
+                                        <td>${secret_name}</td>
                                         <td class="media-left">
                                             <figure class="image">
                                                 <img class="doggg" id="dogg" src="${url}" alt="Placeholder image"/>
